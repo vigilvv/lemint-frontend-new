@@ -266,9 +266,18 @@ const CreatePage: React.FC = () => {
               </div>
 
               {isMinting && (
-                <p className="mt-2 text-xs text-gray-500">
-                  Please be patient. This will take 2-3 mins.
-                </p>
+                <>
+                  <p className="mt-2 text-xs text-gray-500">
+                    Please be patient. This will take 2-3 mins.
+                  </p>
+                  <p className="mt-2 text-xs text-gray-500">
+                    After mint check your profile to see the NFT.
+                  </p>
+                  <p className="mt-2 text-xs text-gray-500">
+                    In case of error. Try again in some time after refreshing
+                    page.
+                  </p>
+                </>
               )}
 
               {/* NFT Name and Symbol Inputs */}
