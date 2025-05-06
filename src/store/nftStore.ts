@@ -92,9 +92,10 @@ export const useNFTStore = create<NFTState>((set, get) => ({
         nftSymbol,
         recipientAddress
       );
+      console.log("Mint success: ", success);
       set({
         isMinting: false,
-        mintSuccess: success,
+        mintSuccess: true,
         txHash,
       });
     } catch (error) {

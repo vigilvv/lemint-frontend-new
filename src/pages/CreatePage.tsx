@@ -38,10 +38,11 @@ const CreatePage: React.FC = () => {
   // const { client, accounts, contextAccounts, walletConnected } =
   //   useUpProvider();
 
-  const { accounts, contextAccounts } = useUpProvider();
+  // const { accounts, contextAccounts } = useUpProvider();
+  const { accounts } = useUpProvider();
 
-  console.log("accounts[0] : ", accounts[0]);
-  console.log("contextAccounts[0] : ", contextAccounts[0]);
+  // console.log("accounts[0] : ", accounts[0]);
+  // console.log("contextAccounts[0] : ", contextAccounts[0]);
 
   //====== Get full name:
   useEffect(() => {
@@ -139,7 +140,7 @@ const CreatePage: React.FC = () => {
     isMinting,
     isGenerating,
     mintSuccess,
-    txHash,
+    // txHash,
     resetMintStatus,
     generateFromPrompt,
   } = useNFTStore();
@@ -167,6 +168,8 @@ const CreatePage: React.FC = () => {
     if (!currentNFT.mediaUrl) return;
 
     await mintCurrentNFT(nftName, nftSymbol, accounts[0]);
+
+    console.log("Create page mintSuccess: ", mintSuccess);
     if (mintSuccess) {
       setShowSuccessAlert(true);
       setTimeout(() => {
@@ -314,7 +317,7 @@ const CreatePage: React.FC = () => {
               )}
 
               {/* Success alert */}
-              {showSuccessAlert && txHash && (
+              {showSuccessAlert && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

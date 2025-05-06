@@ -23,7 +23,7 @@ export const generateMedia = async (
       }
     );
 
-    console.log("ImageData: ", response.data.imageData);
+    // console.log("ImageData: ", response.data.imageData);
 
     const dataUrl = `data:image/png;base64,${response.data.imageData}`;
     return dataUrl;
