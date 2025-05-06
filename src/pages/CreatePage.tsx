@@ -262,7 +262,7 @@ const CreatePage: React.FC = () => {
                 </Button>
               </div>
 
-              {isGenerating && (
+              {isMinting && (
                 <p className="mt-2 text-xs text-gray-500">
                   Please be patient. This will take 2-3 mins.
                 </p>
@@ -355,7 +355,7 @@ const CreatePage: React.FC = () => {
                       Failed to mint NFT
                     </p>
                     <p className="text-xs text-red-600">
-                      Please try again or check your wallet connection.
+                      Refresh page and try again.
                     </p>
                   </div>
                 </motion.div>
