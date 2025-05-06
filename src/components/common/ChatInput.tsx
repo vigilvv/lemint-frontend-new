@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { SendHorizontal } from "lucide-react";
-import { motion } from "framer-motion";
+// import { SendHorizontal } from "lucide-react";
+// import { motion } from "framer-motion";
 import { useNFTStore } from "../../store/nftStore";
 
 interface ChatInputProps {

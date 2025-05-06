@@ -1,7 +1,8 @@
 import React from "react";
-import { Plus, Music, Film } from "lucide-react";
+// import { Plus, Music, Film } from "lucide-react";
+import { Music, Film } from "lucide-react";
 import { twMerge } from "tailwind-merge";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { MediaType } from "../../types";
 
 interface MediaPlaceholderProps {
@@ -16,7 +17,7 @@ const MediaPlaceholder: React.FC<MediaPlaceholderProps> = ({
   mediaType,
   mediaUrl,
   creator,
-  onAddMedia,
+  // onAddMedia,
   className,
 }) => {
   const renderMediaContent = () => {
@@ -27,13 +28,13 @@ const MediaPlaceholder: React.FC<MediaPlaceholderProps> = ({
             <img
               src={mediaUrl}
               alt="NFT Preview"
-              className="w-full h-full object-cover rounded-lg"
+              className="object-cover w-full h-full rounded-lg"
             />
           );
         case "music":
           return (
-            <div className="flex flex-col items-center justify-center h-full w-full p-4">
-              <Music size={48} className="text-indigo-600 mb-2" />
+            <div className="flex flex-col items-center justify-center w-full h-full p-4">
+              <Music size={48} className="mb-2 text-indigo-600" />
               <audio src={mediaUrl} controls className="w-full mt-2" />
             </div>
           );
@@ -42,7 +43,7 @@ const MediaPlaceholder: React.FC<MediaPlaceholderProps> = ({
             <video
               src={mediaUrl}
               controls
-              className="w-full h-full object-cover rounded-lg"
+              className="object-cover w-full h-full rounded-lg"
             />
           );
         default:
@@ -52,9 +53,9 @@ const MediaPlaceholder: React.FC<MediaPlaceholderProps> = ({
 
     // Default placeholder
     return (
-      <div className="flex flex-col items-center justify-center h-full w-full text-gray-400">
+      <div className="flex flex-col items-center justify-center w-full h-full text-gray-400">
         {mediaType === "image" && (
-          <div className="border-2 border-dashed border-gray-300 rounded-lg w-24 h-24 flex items-center justify-center">
+          <div className="flex items-center justify-center w-24 h-24 border-2 border-gray-300 border-dashed rounded-lg">
             <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fillRule="evenodd"
@@ -87,14 +88,14 @@ const MediaPlaceholder: React.FC<MediaPlaceholderProps> = ({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onAddMedia}
-          className="absolute bottom-4 left-4 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-indigo-600 border border-gray-200 hover:bg-gray-50 group"
+          className="absolute flex items-center justify-center w-10 h-10 text-indigo-600 bg-white border border-gray-200 rounded-full shadow-md bottom-4 left-4 hover:bg-gray-50 group"
           title="Upload image"
         >
           <Plus size={20} />
         </motion.button>
       )} */}
 
-      <div className="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded-full">
+      <div className="absolute px-2 py-1 text-xs text-white bg-black bg-opacity-50 rounded-full bottom-2 right-2">
         BY: {creator}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { ChatMessage, MediaType, NFTMetadata } from "../types";
-import { mockGenerateResponse, mockMintResponse } from "./mockData";
+// import { mockGenerateResponse, mockMintResponse } from "./mockData";
 import axios from "axios";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -16,7 +16,8 @@ export const generateMedia = async (
 
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/generate-image",
+      // "http://localhost:3000/api/generate-image",
+      `${import.meta.env.VITE_BACKEND_SERVER}/api/generate-image`,
       {
         prompt,
       }
@@ -46,28 +47,31 @@ export const mintNFT = async (
 
   console.log("Minting NFT");
   try {
-    const response = await axios.post("http://localhost:3000/api/mint", {
-      metadata: {
-        ...metadata,
-        // name: "My Best NFT5",
-        // symbol: "MBN",
-        name: nftName,
-        symbol: nftSymbol,
-        description: "This is the best!",
-      },
-      recipientAddress: recipientAddress,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_BACKEND_SERVER}/api/mint`,
+      {
+        metadata: {
+          ...metadata,
+          // name: "My Best NFT5",
+          // symbol: "MBN",
+          name: nftName,
+          symbol: nftSymbol,
+          description: "This is the best!",
+        },
+        recipientAddress: recipientAddress,
+      }
+    );
 
     console.log(response.data);
 
-    const {
-      success,
-      tokenId,
-      tokenIdBytes32,
-      imageUrl,
-      metadataUrl,
-      contractAddress,
-    } = response.data;
+    // const {
+    //   success,
+    //   tokenId,
+    //   tokenIdBytes32,
+    //   imageUrl,
+    //   metadataUrl,
+    //   contractAddress,
+    // } = response.data;
   } catch (err) {
     // console.log("Failed to save image to IPFS. Please try again.");
     console.log("Failed to mint. Please try again.");
