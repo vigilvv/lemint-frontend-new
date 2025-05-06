@@ -64,6 +64,14 @@ export const mintNFT = async (
 
     console.log(response.data);
 
+    return {
+      success: true,
+      txHash:
+        "0x" +
+        Math.random().toString(16).slice(2) +
+        Math.random().toString(16).slice(2),
+    };
+
     // const {
     //   success,
     //   tokenId,
@@ -76,6 +84,14 @@ export const mintNFT = async (
     // console.log("Failed to save image to IPFS. Please try again.");
     console.log("Failed to mint. Please try again.");
     console.error(err);
+
+    return {
+      success: false,
+      txHash:
+        "0x" +
+        Math.random().toString(16).slice(2) +
+        Math.random().toString(16).slice(2),
+    };
   }
 
   // 1. Save image to Pinata
@@ -100,14 +116,6 @@ export const mintNFT = async (
   // finally {
   //   setIsSaving(false);
   // }
-
-  return {
-    success: true,
-    txHash:
-      "0x" +
-      Math.random().toString(16).slice(2) +
-      Math.random().toString(16).slice(2),
-  };
 
   //==============
 };

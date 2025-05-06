@@ -274,7 +274,8 @@ const CreatePage: React.FC = () => {
                       htmlFor="nft-name"
                       className="block mb-1 text-sm font-medium text-gray-700"
                     >
-                      NFT Name
+                      NFT Name{" "}
+                      <span className="text-sm text-red-400">*required</span>
                     </label>
                     <input
                       type="text"
@@ -290,7 +291,8 @@ const CreatePage: React.FC = () => {
                       htmlFor="nft-symbol"
                       className="block mb-1 text-sm font-medium text-gray-700"
                     >
-                      NFT Symbol
+                      NFT Symbol{" "}
+                      <span className="text-sm text-red-400">*required</span>
                     </label>
                     <input
                       type="text"
@@ -322,8 +324,9 @@ const CreatePage: React.FC = () => {
                       NFT minted successfully!
                     </p>
                     <p className="text-xs text-green-600">
-                      Transaction: {txHash.substring(0, 10)}...
-                      {txHash.substring(txHash.length - 6)}
+                      {/* Transaction: {txHash.substring(0, 10)}...
+                      {txHash.substring(txHash.length - 6)} */}
+                      Check the "Collectibles" tab in your profile!
                     </p>
                   </div>
                 </motion.div>
