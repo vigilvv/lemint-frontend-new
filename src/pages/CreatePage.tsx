@@ -262,6 +262,12 @@ const CreatePage: React.FC = () => {
                 </Button>
               </div>
 
+              {isGenerating && (
+                <p className="mt-2 text-xs text-gray-500">
+                  Please be patient. This will take 2-3 mins.
+                </p>
+              )}
+
               {/* NFT Name and Symbol Inputs */}
               {currentNFT.mediaUrl && (
                 <motion.div
@@ -275,7 +281,7 @@ const CreatePage: React.FC = () => {
                       className="block mb-1 text-sm font-medium text-gray-700"
                     >
                       NFT Name{" "}
-                      <span className="text-sm text-red-400">*required</span>
+                      <span className="text-xs text-red-400">*required</span>
                     </label>
                     <input
                       type="text"
@@ -292,7 +298,7 @@ const CreatePage: React.FC = () => {
                       className="block mb-1 text-sm font-medium text-gray-700"
                     >
                       NFT Symbol{" "}
-                      <span className="text-sm text-red-400">*required</span>
+                      <span className="text-xs text-red-400">*required</span>
                     </label>
                     <input
                       type="text"
