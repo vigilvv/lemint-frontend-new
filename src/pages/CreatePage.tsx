@@ -275,7 +275,8 @@ const CreatePage: React.FC = () => {
                     !currentNFT.mediaUrl ||
                     isMinting ||
                     nftName === "" ||
-                    nftSymbol === ""
+                    nftSymbol === "" ||
+                    !accounts[0]
                   }
                   onClick={handleMint}
                   price={undefined}
