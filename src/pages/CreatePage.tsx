@@ -28,8 +28,8 @@ const CreatePage: React.FC = () => {
 
   const [fullName, setFullName] = useState("username");
 
-  const [nftName, setNftName] = useState("");
-  const [nftSymbol, setNftSymbol] = useState("");
+  const [nftName, setNftName] = useState("MY Sample NFT");
+  const [nftSymbol, setNftSymbol] = useState("NFT");
 
   const [prompt, setPrompt] = useState("");
 
@@ -135,7 +135,7 @@ const CreatePage: React.FC = () => {
   const {
     currentNFT,
     setMediaType,
-    uploadFile,
+    // uploadFile,
     mintCurrentNFT,
     isMinting,
     isGenerating,
@@ -143,6 +143,7 @@ const CreatePage: React.FC = () => {
     // txHash,
     resetMintStatus,
     generateFromPrompt,
+    mintStatus,
   } = useNFTStore();
 
   // useEffect(() => {});
@@ -160,9 +161,13 @@ const CreatePage: React.FC = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      uploadFile(file);
+      // uploadFile(file);
     }
   };
+
+  useEffect(() => {
+    console.log(isGenerating);
+  }, [isGenerating]);
 
   const handleMint = async () => {
     if (!currentNFT.mediaUrl) return;
@@ -170,6 +175,16 @@ const CreatePage: React.FC = () => {
     await mintCurrentNFT(nftName, nftSymbol, accounts[0]);
 
     console.log("Create page mintSuccess: ", mintSuccess);
+    // if (mintSuccess) {
+    //   setShowSuccessAlert(true);
+    //   setTimeout(() => {
+    //     setShowSuccessAlert(false);
+    //     resetMintStatus();
+    //   }, 5000);
+    // }
+  };
+
+  useEffect(() => {
     if (mintSuccess) {
       setShowSuccessAlert(true);
       setTimeout(() => {
@@ -177,7 +192,7 @@ const CreatePage: React.FC = () => {
         resetMintStatus();
       }, 5000);
     }
-  };
+  }, [mintSuccess, resetMintStatus]);
 
   const handleGenerate = async () => {
     console.log("generating");
@@ -194,7 +209,7 @@ const CreatePage: React.FC = () => {
 
   return (
     <div className="flex flex-col h-full bg-white">
-      <div className="px-6">
+      <div className="px-6 ">
         <div className="flex items-center justify-between mb-2">
           <Navigation />
           <InfoPopup />
@@ -241,13 +256,12 @@ const CreatePage: React.FC = () => {
           <div className="flex flex-col h-full">
             <div className="flex-1">
               <ChatInput className="mb-6" setPrompt={setPrompt} />
-
               <div className="flex space-x-3">
                 <Button
                   className="flex-1"
                   variant="secondary"
                   isLoading={isGenerating}
-                  disabled={isGenerating}
+                  disabled={isGenerating || isMinting}
                   price={undefined}
                   onClick={handleGenerate}
                 >
@@ -257,7 +271,12 @@ const CreatePage: React.FC = () => {
                 <Button
                   className="flex-1"
                   isLoading={isMinting}
-                  disabled={!currentNFT.mediaUrl || isMinting}
+                  disabled={
+                    !currentNFT.mediaUrl ||
+                    isMinting ||
+                    nftName === "" ||
+                    nftSymbol === ""
+                  }
                   onClick={handleMint}
                   price={undefined}
                 >
@@ -265,7 +284,36 @@ const CreatePage: React.FC = () => {
                 </Button>
               </div>
 
-              {isMinting && (
+              {(isGenerating || isMinting) && (
+                <div className="flex items-center pl-2 mt-2 text-xs text-indigo-600 left-4 -bottom-6">
+                  <svg
+                    className="w-3 h-3 mr-2 -ml-1 animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  {isGenerating
+                    ? "Generating image..."
+                    : isMinting
+                    ? mintStatus
+                    : "hi"}
+                </div>
+              )}
+              {/* {isMinting && (
                 <>
                   <p className="mt-2 text-xs text-gray-500">
                     Please be patient. This will take 2-3 mins.
@@ -274,12 +322,11 @@ const CreatePage: React.FC = () => {
                     After mint check your profile to see the NFT.
                   </p>
                   <p className="mt-2 text-xs text-gray-500">
-                    In case of error. Try again in some time after refreshing
+                    In case of error, try again in some time after refreshing
                     page.
                   </p>
                 </>
-              )}
-
+              )} */}
               {/* NFT Name and Symbol Inputs */}
               {currentNFT.mediaUrl && (
                 <motion.div
@@ -324,7 +371,6 @@ const CreatePage: React.FC = () => {
                   </div>
                 </motion.div>
               )}
-
               {/* Success alert */}
               {showSuccessAlert && (
                 <motion.div
@@ -349,7 +395,6 @@ const CreatePage: React.FC = () => {
                   </div>
                 </motion.div>
               )}
-
               {/* Error alert */}
               {mintSuccess === false && (
                 <motion.div

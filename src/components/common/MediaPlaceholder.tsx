@@ -67,7 +67,7 @@ const MediaPlaceholder: React.FC<MediaPlaceholderProps> = ({
         )}
         {mediaType === "music" && <Music size={48} />}
         {mediaType === "video" && <Film size={48} />}
-        <p className="mt-2 text-sm">No {mediaType} selected</p>
+        <p className="mt-2 text-sm">No {mediaType} generated</p>
       </div>
     );
   };

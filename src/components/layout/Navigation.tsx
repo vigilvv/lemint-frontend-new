@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { twMerge } from 'tailwind-merge';
-import { CircleUser } from 'lucide-react';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
+import { twMerge } from "tailwind-merge";
+// import { CircleUser } from "lucide-react";
 
 interface NavigationProps {
   className?: string;
@@ -10,22 +10,32 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = ({ className }) => {
   const location = useLocation();
-  
+
   const navItems = [
-    { name: 'Create', path: '/create' },
-    { name: 'New', path: '/new' },
-    { name: 'Market', path: '/market', disabled: true, tooltip: 'Marketplace coming soon' },
-    { name: 'Collab', path: '/collab' },
+    { name: "Create", path: "/create" },
+    { name: "New", path: "/new" },
+    {
+      name: "Market",
+      path: "/market",
+      disabled: true,
+      tooltip: "Marketplace coming soon",
+    },
+    { name: "Collab", path: "/collab" },
   ];
 
   return (
-    <div className={twMerge("flex items-center justify-between py-2", className)}>
+    <div
+      className={twMerge(
+        "flex items-center justify-between py-2 w-full mr-3",
+        className
+      )}
+    >
       <div className="flex items-center space-x-1">
-        <Link 
-          to="/" 
-          className="font-medium text-lg text-gray-800 flex items-center"
+        <Link
+          to="/"
+          className="flex items-center text-lg font-medium text-gray-800"
         >
-          <span className="flex items-center justify-center w-8 h-8 mr-2 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 text-white">
+          <span className="flex items-center justify-center w-8 h-8 mr-2 text-white rounded-full bg-gradient-to-br from-indigo-500 to-purple-600">
             L
           </span>
           LeMint
@@ -38,16 +48,16 @@ const Navigation: React.FC<NavigationProps> = ({ className }) => {
             const isActive = location.pathname === item.path;
             return (
               <li key={item.name}>
-                <Link 
-                  to={item.disabled ? '#' : item.path}
-                  className={item.disabled ? 'cursor-not-allowed' : ''}
+                <Link
+                  to={item.disabled ? "#" : item.path}
+                  className={item.disabled ? "cursor-not-allowed" : ""}
                   title={item.tooltip}
                 >
                   <motion.div
                     className={twMerge(
                       "relative px-3 py-2 text-sm rounded-md transition-colors",
-                      isActive 
-                        ? "text-indigo-700 font-medium" 
+                      isActive
+                        ? "text-indigo-700 font-medium"
                         : item.disabled
                         ? "text-gray-400 hover:text-gray-500"
                         : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
@@ -70,12 +80,12 @@ const Navigation: React.FC<NavigationProps> = ({ className }) => {
             );
           })}
         </ul>
-        
-        <div className="w-px h-6 bg-gray-200 mx-2"></div>
-        
-        <button className="p-1.5 rounded-full hover:bg-gray-100">
+
+        {/* <div className="w-px h-6 mx-2 bg-gray-200"></div> */}
+
+        {/* <button className="p-1.5 rounded-full hover:bg-gray-100">
           <CircleUser size={20} className="text-gray-700" />
-        </button>
+        </button> */}
       </nav>
     </div>
   );
