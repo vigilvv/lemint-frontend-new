@@ -114,7 +114,7 @@ export const useNFTStore = create<NFTState>((set, get) => ({
         console.error(err);
         clearInterval(interval);
       }
-    }, 7000); // this has to be high because /mint has to be fired first
+    }, 10000); // this has to be high because /mint has to be fired first
 
     try {
       const { success, txHash } = await mintNFT(

@@ -41,7 +41,7 @@ const CreatePage: React.FC = () => {
   // const { accounts, contextAccounts } = useUpProvider();
   const { accounts } = useUpProvider();
 
-  // console.log("accounts[0] : ", accounts[0]);
+  console.log("accounts[0] : ", accounts[0]);
   // console.log("contextAccounts[0] : ", contextAccounts[0]);
 
   //====== Get full name:
@@ -170,7 +170,7 @@ const CreatePage: React.FC = () => {
   }, [isGenerating]);
 
   const handleMint = async () => {
-    if (!currentNFT.mediaUrl) return;
+    if (!currentNFT.mediaUrl || !accounts[0] || !nftName || !nftSymbol) return;
 
     await mintCurrentNFT(nftName, nftSymbol, accounts[0]);
 
@@ -369,6 +369,11 @@ const CreatePage: React.FC = () => {
                       maxLength={10}
                     />
                   </div>
+                  {!accounts[0] && (
+                    <p className="text-xs text-gray-400">
+                      Connect UP provider button.
+                    </p>
+                  )}
                 </motion.div>
               )}
               {/* Success alert */}
@@ -412,7 +417,7 @@ const CreatePage: React.FC = () => {
                       Failed to mint NFT
                     </p>
                     <p className="text-xs text-red-600">
-                      Refresh page and try again.
+                      Please try again later.
                     </p>
                   </div>
                 </motion.div>
